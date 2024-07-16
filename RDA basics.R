@@ -1,4 +1,9 @@
 #creating an R file to save codes to perform RDA
+#Calling libraries required for performing RDA
+
+library(permute)
+library(lattice)
+library(vegan)
 #note that the data used in the following tutorial has been AI generated using mockarro.com
 
 #calling library for reading excel files
@@ -19,11 +24,7 @@ Species_std <- scale(Species_data)
 Environ_std <- scale(Environ_data)
 
 #Standardized paper can now be taken to perform RDA
-#Calling libraries required for performing RDA
 
-library(permute)
-library(lattice)
-library(vegan)
 
 RDA_result <- rda(Species_std, Environ_std)
 summary(RDA_result)
