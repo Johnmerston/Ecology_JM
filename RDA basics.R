@@ -5,7 +5,7 @@
 library(readxl)
 
 #Bringing the xlsx file into Rstudio
-Main_file <- read_excel("C:/JOHN/BOREDOM/DATA/MOCK_DATA.xlsx")
+Main_file <- read_excel("File_name.xlsx")
 
 #now that the data has been brought into RStudio, the data can be categorized based on it being a dependent or independant factor
 
