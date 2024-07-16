@@ -6,7 +6,7 @@ library(readxl)
 
 #bring data into Rstudio
 
-PCA_raw <- read_xlsx("C:\\JOHN\\BOREDOM\\DATA\\PCA mock.xlsx")
+PCA_raw <- read_xlsx("File_name.xlsx")
 
 #standardazing data
 
