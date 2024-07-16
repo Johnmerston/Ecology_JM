@@ -4,7 +4,7 @@ library(tidyr)
 library(readxl)
 
 # Reading the data from the provided file
-Test_file <- read_xlsx("C:\\JOHN\\OTHERS\\BALU\\FTIR\\CMs.xlsx")
+Test_file <- read_xlsx("file_name.xlsx")
 
 # Converting the data to a data frame and ensuring column names are correct
 colnames(Test_file) <- c("X", "CM_1", "CM_2", "CM_3", "CM_4")
