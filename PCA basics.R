@@ -1,4 +1,3 @@
-install.packages("factoextra")
 library(factoextra)
 library(ggplot2)
 library(factoextra)
