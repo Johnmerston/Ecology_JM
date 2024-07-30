@@ -1,6 +1,6 @@
 #creating an R file to save codes to perform RDA
 #Calling libraries required for performing RDA
-
+library(readxl)
 library(permute)
 library(lattice)
 library(vegan)
@@ -29,3 +29,5 @@ Environ_std <- scale(Environ_data)
 RDA_result <- rda(Species_std, Environ_std)
 summary(RDA_result)
 plot(RDA_result)
+
+#Do note that the plot quality can be changed by use of ggplot2
