@@ -1,0 +1,62 @@
+#The following libraries are required for an FTIR plot
+#The function of readxl is to import a .xlsx file into Rstudio - Use this library only if you have your date stored in a .xlsx file. 
+#for data in form of a .txt file, upload the data into an excel sheet and then continue with readxl import 
+library(readxl)
+
+#ggplot2 is used for plotting the data obtained post processing through signal package
+#tidyr package is used in this case for converting more than one line plot data into one single plot
+#signal package is used to process the FTIR data - primarily for savitsky golay smoothening - Do read on window size and poly order if mentioned in any research article
+library(ggplot2)
+library(tidyr)
+library(signal)
+
+
+# Reading the data from the provided file
+Test_file <- read_xlsx("C:\\JOHN\\CLASSES\\FTIR_trial.xlsx")
+
+# Converting the data to a data frame and ensuring column names are correct
+#Here X represents the Wave number that is to be plotted along the X axis and CM_s represent the Y axis values for 4 FTIR plots
+# Converting the data to a data frame and ensuring column names are correct
+colnames(Test_file) <- c("X", "Y")
+Test_df <- as.data.frame(Test_file)
+
+# Ensuring X and Y columns are numeric
+Test_df$X <- as.numeric(Test_df$X)
+Test_df$Y <- as.numeric(Test_df$Y)
+
+
+# Define window size and polynomial order
+#Do follow recommendations given in reference articles but one can always customize this if necessary
+#Do note that window size must be an odd number
+window_size <- 61
+poly_order <- 3
+
+# Apply Savitzky-Golay smoothing
+#While there are other types of smoothening methods, majority of research articles follow this
+# Apply Savitzky-Golay smoothing
+Test_df$Y_smooth <- sgolayfilt(Test_df$Y, p = poly_order, n = window_size)
+
+
+Test_df$MUCIN_SPECTRA <- Test_df$Y_smooth
+
+
+# Transform the data into a long format
+data_long <- pivot_longer(Test_df, cols = starts_with("MUCIN_SPECTRA"), names_to = "Series", values_to = "Intensity")
+
+
+# Create the plot
+# Create the plot with highlighted areas
+# Create the plot with highlighted areas
+ggplot(data_long, aes(x = X, y = Intensity, color = Series)) +
+  scale_x_reverse(breaks = c(4000,3750,3500,3250,3000,2750,2500,2250,2000,1750,1500,1250,1000,750,500)) +
+  geom_line() +
+  labs(
+    title = expression(paste("FTRI_spectra_of_",italic("M. indica"),  "_mucin")),
+    x = expression("Wave number cm"^-1),
+    y = "Transmittance %"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Center align the title
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)  # Tilt x-axis labels
+  ) 
