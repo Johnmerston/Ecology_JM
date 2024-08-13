@@ -1,4 +1,10 @@
 #The following libraries are required for an FTIR plot
+#for installing packages
+install.packages("readxl")
+install.packages("ggplot2")
+install.packages("signal")
+install.packages("tidyr")
+
 #The function of readxl is to import a .xlsx file into Rstudio - Use this library only if you have your date stored in a .xlsx file. 
 #for data in form of a .txt file, upload the data into an excel sheet and then continue with readxl import 
 library(readxl)
@@ -23,6 +29,7 @@ Test_df <- as.data.frame(Test_file)
 # Ensuring X and Y columns are numeric
 Test_df$X <- as.numeric(Test_df$X)
 Test_df$Y <- as.numeric(Test_df$Y)
+
 
 
 # Define window size and polynomial order
@@ -51,11 +58,11 @@ ggplot(data_long, aes(x = X, y = Intensity, color = Series)) +
   scale_x_reverse(breaks = c(4000,3750,3500,3250,3000,2750,2500,2250,2000,1750,1500,1250,1000,750,500)) +
   geom_line() +
   labs(
-    title = expression(paste("FTRI_spectra_of_",italic("M. indica"),  "_mucin")),
+    title = expression(paste("FTIR_spectra_of_",italic("M. indica"),  "_mucin")),
     x = expression("Wave number cm"^-1),
     y = "Transmittance %"
   ) +
-  theme_minimal() +
+  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5),  # Center align the title
     axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)  # Tilt x-axis labels
