@@ -2,6 +2,7 @@
 #The function of readxl is to import a .xlsx file into Rstudio - Use this library only if you have your date stored in a .xlsx file. 
 #for data in form of a .txt file, upload the data into an excel sheet and then continue with readxl import 
 library(readxl)
+libafar(readxl)
 
 #ggplot2 is used for plotting the data obtained post processing through signal package
 #tidyr package is used in this case for converting more than one line plot data into one single plot
